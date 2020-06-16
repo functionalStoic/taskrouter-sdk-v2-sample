@@ -12,15 +12,15 @@ const token = createAccessToken({
   workerSid: process.env.WORKER_SID,
 });
 
-const alice = new TaskRouter.Worker(token);
+const jason = new TaskRouter.Worker(token);
 
-alice.on('ready', (readyAlice) => {
-  console.log(`Worker ${readyAlice.sid} is now ready for work`);
+jason.on('ready', (readyJason) => {
+  console.log(`Worker ${readyJason.sid} is now ready for work`);
 });
 
-alice.on('reservationCreated', (reservation) => {
+jason.on('reservationCreated', (reservation) => {
   console.log(
-    `Reservation ${reservation.sid} has been created for ${alice.sid}`,
+    `Reservation ${reservation.sid} has been created for ${jason.sid}`,
   );
   console.log(`Task attributes are: ${reservation.task.attributes}`);
 
@@ -57,7 +57,7 @@ function createAccessToken({
     signingKeySecret,
   );
   accessToken.addGrant(taskRouterGrant);
-  accessToken.identity = 'alice';
+  accessToken.identity = 'jason';
 
   return accessToken.toJwt();
 }
